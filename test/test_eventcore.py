@@ -1,7 +1,6 @@
 import os
 from uuid import uuid4
 import pytest
-import boto3
 from moto import mock_dynamodb2
 
 
@@ -9,16 +8,6 @@ os.environ['AWS_ACCESS_KEY_ID'] = 'testing'
 os.environ['AWS_SECRET_ACCESS_KEY'] = 'testing'
 os.environ['AWS_SECURITY_TOKEN'] = 'testing'
 os.environ['AWS_SESSION_TOKEN'] = 'testing'
-
-
-@pytest.fixture
-def ddb(scope='function'):
-    with mock_dynamodb2():
-        return boto3.client('dynamodb',
-                            region_name='eu-west-1',
-                            aws_access_key_id='testing',
-                            aws_secret_access_key='testing',
-                            aws_session_token='testing')
 
 
 def create_events_table(ddb):
